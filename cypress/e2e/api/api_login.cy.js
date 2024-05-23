@@ -46,7 +46,7 @@ describe("Teste Funcional de login", () => {
     });
   });
 
-  it.only("Deverá buscar usuário cadastrado usuário", () => {
+  it("Deverá buscar usuário cadastrado usuário", () => {
     const nome = "Fulano da Silva";
     cy.request({
       method: "GET",
