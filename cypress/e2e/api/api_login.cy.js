@@ -29,4 +29,30 @@ describe("Teste Funcional de login", () => {
       expect(response.body.message).to.equal("Email e/ou senha inválidos");
     });
   });
+
+  it("Deverá cadastrar usuário", () => {
+    cy.request({
+      method: "POST",
+      url: "http://localhost:3000/usuarios",
+      body: {
+        nome: "Fulano da Silva",
+        email: "beltrano@qa.com.br",
+        password: "teste",
+        administrador: "true",
+      },
+    }).then((response) => {
+      expect(response.status).to.equal(201);
+      expect(response.body.message).to.equal("Cadastro realizado com sucesso");
+    });
+  });
+
+  it.only("Deverá buscar usuário cadastrado usuário", () => {
+    const nome = "Fulano da Silva";
+    cy.request({
+      method: "GET",
+      url: "http://localhost:3000/usuarios?nome=${nome}",
+    }).then((response) => {
+      expect(response.status).to.equal(200);
+    });
+  });
 });
